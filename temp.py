@@ -19,12 +19,13 @@ class ElememntStruct(object):
 
 if __name__ == "__main__":
 
-    s = "/devices"
-    # print s.lstrip("/")
-    # print s[s.find('/')+1: s.find('/', 1)]
-    s = s.lstrip('/')
-    pos = s.find('/')
-    if pos != -1:
-        print s[0, pos]
-    else:
-        print s
+    s = "/devices/wifi?hello"
+    pos = s.find('?')
+    el = s[pos+1:]
+    s = s[0:pos]
+    s = s.strip('/').split('/')
+    last = s[len(s)-1]
+
+    print el
+    print last[last.find('?')+1:]
+    print s
