@@ -9,6 +9,19 @@ class ParsedPath(object):
         self.field_name = field
 
 
+class MyElement(object):
+    id = 0
+    major = 0
+    minor = 0
+    data = 0
+
+    def __init__(self, id=0, major=0, minor=0, data=0):
+        self.id = id
+        self.major = major
+        self.minor = minor
+        self.data = data
+
+
 class ElementStruct(object):
     root = ""
     name = ""
@@ -25,21 +38,21 @@ class Utils(object):
     def parse_path(path):
         parsed_path = ParsedPath()
         if path == "/":
-            parsed_path.service = "/"
+            parsed_path.root = "/"
         else:
             pos = path.find('?')
             if pos != -1:
-                parsed_path.field_name = path[pos + 1:]
+                parsed_path.values = path[pos + 1:]
                 path = path[0:pos]
 
             path = path.strip("/").split("/")
 
             l = len(path)
             if l == 1:
-                parsed_path.service = path[0]
+                parsed_path.root = path[0]
             elif l == 2:
-                parsed_path.service = path[0]
-                parsed_path.resource = path[1]
+                parsed_path.root = path[0]
+                parsed_path.name = path[1]
 
         return parsed_path
 
